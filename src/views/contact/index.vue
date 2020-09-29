@@ -1,9 +1,9 @@
 <template>
-  <div class="lawyer-contact-container">
-    <div class="lawyer-contact-container">
-      <div class="lawyer-contact-title">联系人</div>
+  <div class="contact">
+    <div class="contact-container">
+      <div class="contact-title">联系人</div>
 
-      <div class="lawyer-contact-body">
+      <div class="contact-body">
         <!-- <el-button
           class="cus-el-button-round create-contact-btn"
           type="primary"
@@ -12,21 +12,21 @@
           >添加联系人
         </el-button> -->
 
-        <el-tabs tab-position="left" class="lawyer-contact-el-tabs">
+        <el-tabs tab-position="left" class="contact-tab">
           <!-- 全部 -->
           <el-tab-pane>
-            <div class="lawyer-contact-el-tabs-nav" slot="label">
+            <div slot="label" class="contact-tab-left-item">
               <div class="text">全部</div>
               <div class="total">{{ allCustomerList.length }}</div>
             </div>
 
-            <div class="lawyer-contact-el-tabs-panel">
+            <div>
               <!-- <contact-table :table-data="allCustomerList"></contact-table> -->
             </div>
           </el-tab-pane>
 
           <el-tab-pane>
-            <div class="lawyer-contact-el-tabs-nav" slot="label">
+            <div slot="label" class="contact-tab-left-item">
               <div class="text">企业客户</div>
               <div class="total">{{ enterpriseCustomerList.length }}</div>
             </div>
@@ -37,51 +37,51 @@
           </el-tab-pane>
 
           <el-tab-pane>
-            <div class="lawyer-contact-el-tabs-nav" slot="label">
+            <div slot="label" class="contact-tab-left-item">
               <div class="text">个人客户</div>
               <div class="total">{{ singleCustomerList.length }}</div>
             </div>
 
-            <div class="lawyer-contact-el-tabs-panel">
+            <div>
               <!-- <contact-table :table-data="singleCustomerList"></contact-table> -->
             </div>
           </el-tab-pane>
 
           <el-tab-pane>
-            <div class="lawyer-contact-el-tabs-nav" slot="label">
+            <div slot="label" class="contact-tab-left-item">
               <div class="text">我关注的</div>
               <div class="total">{{ followCustomerList.length }}</div>
             </div>
 
-            <div class="lawyer-contact-el-tabs-panel">
+            <div>
               <!-- <contact-table :table-data.sync="followCustomerList"></contact-table> -->
             </div>
           </el-tab-pane>
 
           <el-tab-pane>
-            <div class="lawyer-contact-el-tabs-nav" slot="label">
+            <div slot="label" class="contact-tab-left-item">
               <div class="text">服务中</div>
               <div class="total">{{ underwayCustomerList.length }}</div>
             </div>
 
-            <div class="lawyer-contact-el-tabs-panel">
+            <div>
               <!-- <contact-table :table-data="underwayCustomerList"></contact-table> -->
             </div>
           </el-tab-pane>
 
           <el-tab-pane>
-            <div class="lawyer-contact-el-tabs-nav" slot="label">
+            <div slot="label" class="contact-tab-left-item">
               <div class="text">对方/关联当事人</div>
               <div class="total">{{ relationCustomerList.length }}</div>
             </div>
 
-            <div class="lawyer-contact-el-tabs-panel">
+            <div>
               <!-- <relation-table :table-data="relationCustomerList"></relation-table> -->
             </div>
           </el-tab-pane>
 
           <el-tab-pane>
-            <div class="lawyer-contact-el-tabs-nav" slot="label">
+            <div slot="label">
               <div class="text">跟进计划</div>
               <div class="total">3</div>
             </div>
@@ -95,13 +95,8 @@
       :visible.sync="createCustomerDialogVisible"
       top="5vh"
       width="690px"
-      class="el-dialog-body-overflow-y"
     >
-      <el-tabs
-        class="cus-create-customer-dialog"
-        v-model="createCustomerDialogActiveName"
-        type="card"
-      >
+      <el-tabs v-model="createCustomerDialogActiveName" type="card">
         <el-tab-pane label="企业" name="first">
           <el-form
             ref="form"
@@ -109,7 +104,6 @@
             :validate="validateForm"
             :rules="rules"
             label-width="50px"
-            class="cus-create-customer-form"
           >
             <!-- 企业相关 -->
             <el-form-item prop="name">
@@ -119,7 +113,6 @@
               <el-input
                 v-model="enterpriseFormGroup.name"
                 placeholder="* 企业名称"
-                class="cus-create-customer-form-input"
                 clearable
               ></el-input>
             </el-form-item>
@@ -131,7 +124,6 @@
               <el-input
                 v-model="enterpriseFormGroup.shortName"
                 placeholder="  企业简称"
-                class="cus-create-customer-form-input"
                 clearable
               >
               </el-input>
@@ -144,7 +136,6 @@
               <el-select
                 v-model="enterpriseFormGroup.industries"
                 placeholder=" 所属行业"
-                class="cus-create-customer-form-input"
                 clearable
               >
                 <el-option
@@ -163,7 +154,6 @@
               </template>
 
               <el-date-picker
-                class="cus-create-customer-form-input"
                 type="date"
                 v-model="enterpriseFormGroup.registerDate"
                 placeholder=" 注册日期"
@@ -529,4 +519,38 @@ export default {
   }
 }
 
+.contact-tab {
+  /deep/ .el-tabs__header.is-left {
+    width: 250px;
+  }
+
+  /deep/ .el-tabs__item {
+    height: 60px;
+  }
+
+  /deep/ .el-tabs__item.is-active {
+    color: #409eff;
+    background: #f7faff;
+  }
+}
+
+.contact-tab-left {
+  &-item {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    > div {
+      flex: 1;
+    }
+
+    > .text {
+      text-align: left;
+    }
+
+    > .total {
+      text-align: right;
+    }
+  }
+}
 </style>
